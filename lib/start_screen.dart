@@ -1,30 +1,54 @@
 import 'package:flutter/material.dart';
 
 class StartScreen extends StatelessWidget{
-  const StartScreen({super.key});
+
+   const StartScreen(this.startQuiz,{super.key});
+
+
+  final void Function() startQuiz;
+
   @override
 
   Widget build(context){
 
-    return const Scaffold(
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-         Image(image: AssetImage('assets/images/quiz-logo.png')),
+    return  Center(
+      child: Column(
 
-          SizedBox(height: 10,),
+         mainAxisSize: MainAxisSize.min,
+          children: [
+           const Image(image: AssetImage('assets/images/quiz-logo.png',
 
-          Text('Do your best and win'),
+           ),
+           width: 300,
+           color: Color.fromARGB(150, 255, 255, 255)),
 
-          SizedBox(height: 10,),
+            const SizedBox(height: 20,),
 
-          FloatingActionButton
-            (
-            onPressed: () {};
-            child: Text('Start'),
-          )
+            const Text('Learn Flutter the fun way!',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30
+            ),),
 
-        ],
+            const SizedBox(height: 20,),
+
+            OutlinedButton.icon
+              (
+              onPressed:(){
+
+                startQuiz();
+              },
+              label: const Text('Start Quiz',),
+                icon: const Icon(Icons.arrow_right),
+
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.white,
+              )
+
+            )
+
+          ],
+
       ),
     );
   }
