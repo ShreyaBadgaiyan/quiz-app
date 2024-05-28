@@ -14,8 +14,16 @@ class QuestionsScreen extends StatefulWidget{
 }
 
 class _QuestionScreenState extends State<QuestionsScreen>{
-var currentQuestion=questions[0];
+  var currentQuestionIndex=0;
 
+void answerQuestion(){
+ // currentQuestionIndex=currentQuestionIndex+1;
+//  currentQuestionIndex+=1;
+  currentQuestionIndex++;
+setState(() {
+
+});
+}
 // var num=0;
 //   var currentQuestion=questions[num];
 //   void nextQuestion(){
@@ -27,10 +35,11 @@ var currentQuestion=questions[0];
 //
 //   }
 
-  @override
 
   @override
   Widget build(context){
+    final currentQuestion=questions[currentQuestionIndex];
+
 
     return  SizedBox(
       width: double.infinity,
@@ -53,10 +62,13 @@ var currentQuestion=questions[0];
             const SizedBox(height: 30,),
             //children only wants widget in children and not nested list
             //... helps to take all values in a list and place them as comma separated values
-            ...currentQuestion.answers.map(
+            ...currentQuestion.getShuffledAnswer().map(
               //map allows you to convert value in list to other values
+              //shuffle method can be called on lists to give methods in shuffle type
+              //shuffle changes the original list while map does not change the original list
+
                 (answer){
-                  return OptionButton(answerText: answer, onTap: (){});
+                  return OptionButton(answerText: answer, onTap: answerQuestion);
                 }
             ),
             // OptionButton(answerText: currentQuestion.answers[0], onTap: (){}),

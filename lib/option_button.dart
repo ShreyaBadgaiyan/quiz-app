@@ -23,7 +23,8 @@ class OptionButton extends StatelessWidget {
         ),
 
 
-            child: Text(answerText),),
+            child: Text(answerText,
+            textAlign: TextAlign.center,),),
         SizedBox(height: 10,)
       ],
     );
