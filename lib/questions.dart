@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/models/quiz_questions.dart';
 import 'package:quiz_app/option_button.dart';
 
 class QuestionsScreen extends StatefulWidget{
-  const QuestionsScreen({super.key});
+
+  final void Function(String answer) onSelectAnswer;
+
+  const QuestionsScreen({super.key, required this.onSelectAnswer});
 
 
  @override
@@ -16,11 +20,14 @@ class QuestionsScreen extends StatefulWidget{
 class _QuestionScreenState extends State<QuestionsScreen>{
   var currentQuestionIndex=0;
 
-void answerQuestion(){
+void answerQuestion(String selectedAnswer){
  // currentQuestionIndex=currentQuestionIndex+1;
 //  currentQuestionIndex+=1;
-  currentQuestionIndex++;
+//helps to call the method
+  widget.onSelectAnswer(selectedAnswer);
 setState(() {
+  currentQuestionIndex++;
+
 
 });
 }
@@ -55,9 +62,15 @@ setState(() {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           //stretch to be as wide as possible
           children: [
-             Text(currentQuestion.text,style: const TextStyle(
-              color: Colors.white
-            ),
+              Text(currentQuestion.text,style: GoogleFonts.lato(
+                color:   Color.fromARGB(255, 201, 153, 251),
+
+                fontSize: 24,
+                fontWeight: FontWeight.bold
+              ),
+          //  const TextStyle(
+            //   color: Colors.white,
+            // ),
              textAlign: TextAlign.center,),
             const SizedBox(height: 30,),
             //children only wants widget in children and not nested list
@@ -68,7 +81,11 @@ setState(() {
               //shuffle changes the original list while map does not change the original list
 
                 (answer){
-                  return OptionButton(answerText: answer, onTap: answerQuestion);
+                  return OptionButton(
+                      answerText: answer,
+                      onTap: (){
+                    answerQuestion(answer);
+                  });
                 }
             ),
             // OptionButton(answerText: currentQuestion.answers[0], onTap: (){}),
