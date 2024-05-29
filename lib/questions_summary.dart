@@ -8,19 +8,24 @@ class QuestionsSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Column(
+      mainAxisSize: MainAxisSize.min,
 
       children: summaryData.map((data){
         return Row(children: [
           Text(data['question_index'].toString()),
-          Column(
-            children: [
-              Text(data['question'].toString()),
-              SizedBox(height: 5,),
-              Text(data['correct_answer'].toString()),
-              SizedBox(height: 5,),
-              Text(data['chosen_answer'].toString())
+          Expanded(
+            //expanded is used to resolve renderflex error,the column only expands such that it fills up the space provided by row
 
-            ],
+            child: Column(
+              children: [
+                Text(data['question'].toString()),
+                SizedBox(height: 5,),
+                Text(data['correct_answer'].toString()),
+                SizedBox(height: 5,),
+                Text(data['chosen_answer'].toString())
+
+              ],
+            ),
           )
         ],);
     }).toList()
